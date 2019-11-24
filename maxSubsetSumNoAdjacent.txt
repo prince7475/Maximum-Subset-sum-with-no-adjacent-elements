@@ -1,0 +1,26 @@
+Write a function that takes in an array of integers and returns an 
+integer representing the maximum sum of non-adjacent elements in the
+array. If a sum cannot be generated the function should return 0
+
+function maxSubsetSumNoAdjacent(array){
+if(array.length === 0) return 0
+if(array.length === 1) return array[0]
+  let arrMaxSum = array.map((num) => num)
+  arrMaxSum[1] = Math.max(arrMaxSum[0], arrMaxSum[1])
+  for(let i = 2; i < array.length; i++){
+    arrMaxSum[i] = Math.max(arrMaxSum[i - 2] + array[i], arrMaxSum[i - 1])
+  }
+  return arrMaxSum[arrMaxSum.length - 1]
+}
+
+Time --> O(n)
+Space --> O(n)
+Main method(array)
+- Create an array- > arrMaxSum = [] --> copy of array
+arrMaxSum[1] = Math.max(arrMaxSum[0], arrMaxSum[1])
+
+for(let i = 2; i < array.length; i++){
+  arrMaxSum[i] = Math.max(arrMaxSum[i - 2] + array[i], arrMaxSum[i - 1])
+}
+
+return arrMaxSum[arrMaxSum.length - 1]
